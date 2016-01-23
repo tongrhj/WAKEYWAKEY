@@ -1,0 +1,75 @@
+FORMAT: 1A
+HOST: http://api.jaredt.xyz
+
+# ga-scoreboard
+
+ga-scoreboard API provides a simulated list of highscores for a non-existant game. Learning exercise for General Assembly Singapore's WDI 2015 to learn Express, MongoDB, RESTful API, test driven development, code coverage and documentation.
+
+## Scores Collection [/scores]
+
+### List All Scores [GET]
+
++ Response 200 (application/json)
+
+        [
+          {
+            "_id":"565d33e6e4b030fba33de540",
+            "name":"Jared",
+            "score":999
+          }, {
+            "_id":"565d445912629844454a126b",
+            "name":"Edge",
+            "score":375
+          }, {
+            "_id":"565d3403e4b030fba33de542",
+            "name":"Diep",
+            "score":140
+          }
+        ]
+
+### Search Scores by Name [GET /scores/:name]
+
++ Response 200 (application/json)
+
+        [
+          {
+            "_id":"565d33e6e4b030fba33de540",
+            "name":":name",
+            "score":999
+          }
+        ]
+
+### Create a New Score [POST /scores]
+
+Create a new score with name and score.
+
++ Request (application/json) & Response 201 (application/json)
+
+        {
+            "name": "Zenzel",
+            "score": 666
+        }
+
+
+### Update an Existing Score [PUT /scores/:name/:score]
+
+Searches for document with :name and changes to new :score.
+
++ Sample Request: PUT /scores/Zenzel/0
+
++ Response 201 (application/json)
+
+        {
+            "name": "Zenzel",
+            "score": 0
+        }
+
+### Delete an Existing Score [DELETE /scores]
+
+Searches for document with :name and changes to new :score.
+
++ Request (application/json)
+
+        {
+            "name": "Zenzel"
+        }
