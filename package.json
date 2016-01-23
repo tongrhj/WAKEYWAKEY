@@ -1,8 +1,7 @@
 {
-  "name": "gasgwdi-scoreboard-api",
+  "name": "IWULT-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "api.js",
+  "description": "If you fail to wake up, IWULT takes a selfie",
   "scripts": {
     "start": "node app/server.js",
     "dev": "nodemon app/server.js --exec babel-node",
@@ -29,15 +28,15 @@
   },
   "dependencies": {
     "body-parser": "^1.14.1",
+    "cors": "^2.7.1",
     "express": "^4.13.3",
     "express-jwt": "^3.3.0",
+    "kerberos": "0.0.18",
     "mongoose": "^4.2.8",
-    "node-fetch": "^1.3.3",
-    "cors": "^2.7.1"
+    "node-fetch": "^1.3.3"
   },
   "standard": {
     "ignore": [
-      "/deprecated/*",
       "/test/*"
     ]
   }
