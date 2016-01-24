@@ -2,6 +2,8 @@
 ### If you don't get out of bed in time, WAKEY WAKEY posts your sleeping face to the world.
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-green.svg?style=flat-square)](https://github.com/feross/standard)
 
+![screenshot](https://raw.githubusercontent.com/tongrhj/WAKEYWAKEY/master/public/img/wakeywakey.png "WAKEY WAKEY Sreenshot")
+
 ## Installation
 ```
 npm install
