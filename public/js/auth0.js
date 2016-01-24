@@ -27,6 +27,8 @@ document.querySelector('#btn-login').addEventListener('click', () => {
       // Save the profile
       userProfile = profile
       document.getElementById('name').textContent = profile.given_name
+
+      //Display Step 2
       document.getElementById('captureBox').classList.remove('hidden')
       document.getElementById('captureBox').classList.add('visible')
     }

@@ -13,10 +13,4 @@ const Photo = mongoose.model('Pictures', {
   url: String
 })
 
-// mongoose.connect('mongodb://' + process.env.MONGODB_USER + ':' + process.env.MONGODB_PASSWORD + '@ds061954.mongolab.com:61954/wdi-sg-playground')
-//
-// const PlayerScore = mongoose.model('Picture', {
-//   name: String
-// })
-
 module.exports = Photo

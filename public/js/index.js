@@ -137,7 +137,6 @@ function retrievePictures () {
     .then((res) => res.json())
     .then((res) => {
       res.forEach((doc) => {
-        // const photoPost = JSON.stringify(doc.name) + ' ID: ' + JSON.stringify(doc.score)
         const photoPost = document.createElement('img')
         photoPost.src = doc.url
         document.querySelector('#scoreboard').appendChild(photoPost)
