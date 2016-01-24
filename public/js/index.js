@@ -1,4 +1,5 @@
 'use strict'
+/* global Audio fetch Request localStorage */
 
 const width = 320    // We will scale the photo width to this
 let height = 0       // This will be computed based on the input stream
@@ -12,13 +13,14 @@ let startbutton = null
 
 let alarm
 let captureCountdown
+let cancelbutton
 
 function startup () {
   video = document.getElementById('capture-video')
   canvas = document.getElementById('capture-canvas')
   photo = document.getElementById('capture-photo')
   startbutton = document.getElementById('capture-startbtn')
-  const cancelbutton = document.getElementById('capture-cancelbtn')
+  cancelbutton = document.getElementById('capture-cancelbtn')
 
   navigator.getMedia = (navigator.getUserMedia ||
                         navigator.webkitGetUserMedia ||
@@ -84,8 +86,10 @@ function startCountdown (time) {
 
 function cancelCountdown () {
   window.clearTimeout(captureCountdown)
-  alarm.pause();
-  alarm.currentTime = 0;
+  alarm.pause()
+  alarm.currentTime = 0
+  cancelbutton.classList.remove('visible')
+  cancelbutton.classList.add('hidden')
 }
 
 function takepicture () {
@@ -118,12 +122,10 @@ function takepicture () {
     .catch((error) => {
       console.log('There has been a problem with your fetch operation: ' + error.message)
     })
-
   } else {
     clearphoto()
   }
 }
-
 
 function retrievePictures () {
   // Fetch the pictures so user is shamed since they didnt wake in time
