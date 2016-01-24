@@ -12,15 +12,15 @@ const jwt = require('express-jwt')
 //   api_secret: 'TaywZ-zWEzJ_VShLbsjemcrQ9t0'
 // })
 
-import Photo from './data.js'
+const Photo = require('./data.js')
 
 app.use(bodyParser.json({limit: '5mb'}))
 app.use(cors())
 app.use(express.static('public'))
 
 const jwtCheck = jwt({
-  secret: new Buffer(process.env.SCOREBOARD_AUTH0_SECRET, 'base64'),
-  audience: process.env.SCOREBOARD_AUTH0_AUDIENCE
+  secret: new Buffer(process.env.WAKEY_AUTH0_SECRET, 'base64'),
+  audience: process.env.WAKEY_AUTH0_AUDIENCE
 })
 
 // app.use('/gallery', jwtCheck)

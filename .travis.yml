@@ -1,10 +1,6 @@
 language: node_js
 node_js:
   - 5.1
-script:
-  - npm run test
-# after_success:
-#   - npm run test:report
 cache:
   directories:
     - node_modules
