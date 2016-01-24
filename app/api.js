@@ -2,14 +2,19 @@
 
 const express = require('express')
 const app = express()
-// const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const jwt = require('express-jwt')
+// const cloudinary = require('cloudinary')
+// cloudinary.config({
+//   cloud_name: 'tongrhj',
+//   api_key: '473581557469736',
+//   api_secret: 'TaywZ-zWEzJ_VShLbsjemcrQ9t0'
+// })
 
 import Photo from './data.js'
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '5mb'}))
 app.use(cors())
 app.use(express.static('public'))
 
@@ -42,7 +47,32 @@ app.get('/gallery', (req, res) => {
   .then(data => {
     res.json(data)
   })
+  // cloudinary.api.resources((items) => {
+  //   res.render('index', { images: items.resources, cloudinary: cloudinary })
+  // })
+  // cloudinary.uploader.upload("http://www.example.com/image.jpg", function(result) {
+  //   console.log(result)
+  // })
+  // console.log('Loading Gallery')
 })
+
+app.post('/gallery', (req, res) => {
+  const photoToUpload = new Photo(req.body)
+  console.log('Request: ' + req.body.name)
+  // console.log(req.body.url)
+  photoToUpload.save(err => {
+    if (err) res.status(404).end('Score Not Found')
+    res.json(photoToUpload)
+  })
+})
+
+// app.post('/upload', (req, res) => {
+//   const photoToUpload = new Photo(req.body)
+//   photoToUpload.save(err => {
+//     if (err) res.status(404).end('Score Not Found')
+//     res.json(photoToUpload)
+//   })
+// })
 
 // app.get('/scores', (req, res) => {
 //   PlayerScore

@@ -10,7 +10,7 @@ mongoose.connect('mongodb://admin:password@ds047950.mongolab.com:47950/iwult-app
 
 const Photo = mongoose.model('Pictures', {
   name: String,
-  id: Number
+  url: String
 })
 
 // mongoose.connect('mongodb://' + process.env.MONGODB_USER + ':' + process.env.MONGODB_PASSWORD + '@ds061954.mongolab.com:61954/wdi-sg-playground')

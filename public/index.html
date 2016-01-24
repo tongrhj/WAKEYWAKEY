@@ -8,93 +8,45 @@
   </head>
   <body style="background-color: coral;">
 
-    <div style="display:flex;flex-direction: column;justify-content:space-around;align-items:center;">
-      <div style="width: 300px;height:350px;background-color: white;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items:center;">
+    <div style="display:flex;flex-direction: row;justify-content:space-around;align-items:center;">
+      <div style="width: 300px;background-color: white;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items:center;">
+        <h1>WAKEY WAKEY</h1>
+        <h2>Have difficulty waking up on time?</h2>
+        <h3>Let WAKEY WAKEY secretly watch you all night as you sleep.</h3>
+        <h3>If you don't wake up, WAKEY WAKEY will take a photo of you and post it for the whole world to see!</h3>
+        <h3>Now you'll surely make the effort to get out of bed!</h3>
+        <p>Thanks WAKEY WAKEY. YOU'RE AWESOME!</p>
+      </div>
+
+      <div style="width: 300px;background-color: white;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items:center;">
+        <h1 style="color:#489cdf;">Step 1:</h1>
         <input id="btn-login" class="btn-login" type="submit" value="Login with Facebook" style="font-size:100px;"/>
         <p>Welcome <span id="name"></span></p>
       </div>
 
-      <div style="width: 300px;background-color: white;flex-direction:column;text-align:center;display:flex;justify-content:center;align-items:center;" id="scoreboard">
+
+      <div id="capture" style="display:flex;flex-direction: column;background-color: white;">
+        <h1 style="color:#489cdf;">Step 2:</h1>
+        <div class="capture-camera">
+          <video id="capture-video">Video stream not available.</video>
+          <h1>Wake Me Up in</h1>
+          <button id="capture-startbtn">8 hours</button>
+        </div>
+        <canvas id="capture-canvas" style="display:none;">
+        </canvas>
+        <div class="capture-output">
+          <img id="capture-photo" alt="The screen capture will appear in this box.">
+        </div>
       </div>
 
-      <div id="capture" style="display:flex;flex-direction: column;">
-        <div class="camera">
-          <video id="video">Video stream not available.</video>
-          <button id="startbutton">Take photo</button>
-        </div>
-        <canvas id="canvas">
-        </canvas>
-        <div class="output">
-          <img id="photo" alt="The screen capture will appear in this box.">
-        </div>
+      <div style="width: 300px;background-color: white;flex-direction:column;text-align:center;display:flex;justify-content:center;align-items:center;" id="scoreboard">
+        <h3>These people woke up like this:</h3>
       </div>
     </div>
 
 
-      <script type="text/javascript">
-        var lock = new Auth0Lock('LRPGy0n09P5sE8FbmWlUQhXRUCY2EI2H', 'tongrhj.auth0.com')
+      <script src="./js/auth0.js"></script>
 
-        var userProfile
-
-        document.querySelector('#btn-login').addEventListener('click', function() {
-          lock.show({ authParams: { scope: 'openid' } }, function(err, profile, token) {
-            if (err) {
-              // Error callback
-              console.error("Something went wrong: ", err)
-              alert("Something went wrong, check the Console errors")
-            } else {
-              // Success calback
-              console.log("Hey dude", profile)
-
-              // Save the JWT token.
-              var hash = lock.parseHash(window.location.hash)
-              if (hash) {
-                if (hash.error) {
-                  console.log("There was an error logging in", hash.error)
-                  alert('There was an error: ' + hash.error + '\n' + hash.error_description)
-                } else {
-                  //save the token in the session:
-                  localStorage.setItem('userToken', hash.id_token)
-                }
-              }
-
-              // Save the profile
-              userProfile = profile
-              document.getElementById('name').textContent = profile.name
-
-              // Retrieve the Profile
-              // var id_token = localStorage.getItem('userToken');
-              // if (id_token) {
-              //   lock.getProfile(id_token, function (err, profile) {
-              //     if (err) return alert('There was an error geting the profile: ' + err.message)
-              //     document.getElementById('name').textContent = profile.name
-              //     console.log(profile.name)
-              //     console.log(profile)
-              //     console.log('anthing')
-              //   })
-              // }
-
-            // Fetch the scoreboard since user is now authenticated
-              fetch('/gallery', {
-                headers: {
-                  'Authorization': 'Bearer ' + localStorage.getItem('userToken')
-                },
-                method: 'GET',
-                cache: false
-              })
-                .then((res) => res.json())
-                .then((res) => {
-                  res.forEach((doc) => {
-                    const photoPost = JSON.stringify(doc.name) + ' ID: ' + JSON.stringify(doc.score)
-                    var newEntry = document.querySelector('#scoreboard').appendChild(document.createElement("p"))
-                    newEntry.textContent = photoPost
-                  })
-                })
-            }
-          })
-
-        })
-      </script>
       <script src="./js/index.js"></script>
   </body>
 </html>
