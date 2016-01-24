@@ -10,11 +10,15 @@ let canvas = null
 let photo = null
 let startbutton = null
 
+let alarm
+let captureCountdown
+
 function startup () {
   video = document.getElementById('capture-video')
   canvas = document.getElementById('capture-canvas')
   photo = document.getElementById('capture-photo')
   startbutton = document.getElementById('capture-startbtn')
+  const cancelbutton = document.getElementById('capture-cancelbtn')
 
   navigator.getMedia = (navigator.getUserMedia ||
                         navigator.webkitGetUserMedia ||
@@ -50,7 +54,13 @@ function startup () {
   }, false)
 
   startbutton.addEventListener('click', (e) => {
-    setTimeout(takepicture, 5000)
+    startCountdown(8000)
+    cancelbutton.classList.remove('hidden')
+    cancelbutton.classList.add('visible')
+    cancelbutton.addEventListener('click', (e) => {
+      e.preventDefault()
+      cancelCountdown()
+    })
     e.preventDefault()
   }, false)
 
@@ -59,11 +69,23 @@ function startup () {
 
 function clearphoto () {
   var context = canvas.getContext('2d')
-  context.fillStyle = '#AAA'
+  context.fillStyle = '#FFF'
   context.fillRect(0, 0, canvas.width, canvas.height)
 
   var data = canvas.toDataURL('image/png')
   photo.setAttribute('src', data)
+}
+
+function startCountdown (time) {
+  alarm = new Audio('sound/alarm.mp3')
+  alarm.play()
+  captureCountdown = setTimeout(takepicture, time)
+}
+
+function cancelCountdown () {
+  window.clearTimeout(captureCountdown)
+  alarm.pause();
+  alarm.currentTime = 0;
 }
 
 function takepicture () {
@@ -110,7 +132,7 @@ function retrievePictures () {
       'Authorization': 'Bearer ' + localStorage.getItem('userToken')
     },
     method: 'GET',
-    cache: true
+    cache: false
   })
     .then((res) => res.json())
     .then((res) => {

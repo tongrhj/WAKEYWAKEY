@@ -11,7 +11,23 @@
     <meta property="og:description" content="If you don't get out of bed in time, WAKEY WAKEY posts your sleeping face to the world.">
     <meta property="og:image" content="http://wakey2.herokuapp.com/img/wakeywakey.png">
     <meta property="og:locale" content="en_GB">
-    
+
+    <style media="screen">
+      #captureBox,
+      #capture-cancelbtn {
+        transition: opacity 1s;
+      }
+
+      .hidden {
+        visibility: hidden;
+        opacity: 0;
+      }
+
+      .visible {
+        visibility: visible;;
+        opacity: 1;
+      }
+    </style>
   </head>
   <body style="background-color: coral;">
 
@@ -25,19 +41,26 @@
         <p>Thanks WAKEY WAKEY. YOU'RE AWESOME!</p>
       </div>
 
-      <div style="width: 300px;background-color: white;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items:center;">
+      <div style="width:280px;background-color: white;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items:center;">
         <h1 style="color:#489cdf;">Step 1:</h1>
         <input id="btn-login" class="btn-login" type="submit" value="Login with Facebook" style="font-size:100px;"/>
-        <p>Welcome <span id="name"></span></p>
+        <p>Welcome <span id="name" style="font-weight:700;"></span></p>
       </div>
 
 
-      <div id="capture" style="display:flex;flex-direction: column;background-color: white;">
+      <div id="captureBox" class="hidden" style="width:320px;display:flex;flex-direction: column;background-color: white;">
         <h1 style="color:#489cdf;">Step 2:</h1>
         <div class="capture-camera">
           <video id="capture-video">Video stream not available.</video>
           <h1>Wake Me Up in</h1>
           <button id="capture-startbtn">8 hours</button>
+          <button id="capture-cancelbtn" class="hidden" style="background-color:orange;">STOP ALARM</button>
+          <p>
+            For demo purposes, alarm is set to go off immediately and photo capture immediately after that.
+          </p>
+          <p>
+            Ideally, the alarm will go off after 8 hours, and the photo capture at least 2 minutes after.
+          </p>
         </div>
         <canvas id="capture-canvas" style="display:none;">
         </canvas>
@@ -46,7 +69,7 @@
         </div>
       </div>
 
-      <div style="width: 300px;background-color: white;flex-direction:column;text-align:center;display:flex;justify-content:center;align-items:center;" id="scoreboard">
+      <div style="width: 340px;background-color: white;flex-direction:column;text-align:center;display:flex;justify-content:center;align-items:center;" id="scoreboard">
         <h3>These people woke up like this:</h3>
       </div>
     </div>
