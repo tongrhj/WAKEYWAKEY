@@ -14,7 +14,7 @@ npm run dev
 ## What WAKEY WAKEY Does
 * Facebook Login
 * Starts alarm countdown, can be cancelled
-* Use WebRTC to capture a photo of you sleeping after 5 second (demo-only)/ 8 hours
+* [Use WebRTC to capture a photo](https://github.com/mdn/samples-server/tree/master/s/webrtc-capturestill) of you sleeping after 5 second (demo-only)/ 8 hours
 * Converts image to Base64 and posts it to MongoLabs
 * Displays all incriminating images from MongoLabs
 
