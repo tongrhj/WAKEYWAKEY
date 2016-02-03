@@ -134,7 +134,7 @@ function retrievePictures () {
       'Authorization': 'Bearer ' + localStorage.getItem('userToken')
     },
     method: 'GET',
-    cache: false
+    cache: true
   })
     .then((res) => res.json())
     .then((res) => {

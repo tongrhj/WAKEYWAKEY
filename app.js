@@ -5,6 +5,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const jwt = require('express-jwt')
+// const path = require('path')
 // const cloudinary = require('cloudinary')
 // cloudinary.config({
 //   cloud_name: 'tongrhj',
@@ -24,7 +25,7 @@ const jwtCheck = jwt({
 })
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: __dirname })
+  res.sendFile(__dirname + '/public/' + 'app.html')
 })
 
 app.get('/gallery', (req, res) => {
@@ -55,6 +56,10 @@ app.post('/gallery', (req, res) => {
     if (err) res.status(404).end('Score Not Found')
     res.json(photoToUpload)
   })
+})
+
+app.use('*', (req,res) => {
+  res.status(404).send('404')
 })
 
 module.exports = app

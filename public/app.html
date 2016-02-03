@@ -59,7 +59,8 @@
       <div class="mainBox" style="width:280px;background-color: white;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items:center;">
         <h1 style="color:#489cdf;">Step 1:</h1>
         <input id="btn-login" class="btn-login" type="submit" value="Login with Facebook" />
-        <p>Welcome <span id="name" style="font-weight:700;"></span></p>
+        <p>Welcome <span id="profile-name" style="font-weight:700;"></span></p>
+        <div id="profile-picture"></div>
       </div>
 
 
@@ -94,7 +95,23 @@
       </div>
     </div>
 
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '884566948329674',
+          xfbml      : true,
+          version    : 'v2.5'
+        });
+      };
 
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+      </script>
       <script src="./js/auth0.js"></script>
 
       <script src="./js/index.js"></script>
