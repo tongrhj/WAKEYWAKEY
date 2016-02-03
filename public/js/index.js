@@ -15,6 +15,8 @@ let alarm
 let captureCountdown
 let cancelbutton
 
+const imgurClientID = '4b24a6a46e6bea7'
+
 function startup () {
   video = document.getElementById('capture-video')
   canvas = document.getElementById('capture-canvas')
@@ -93,7 +95,7 @@ function cancelCountdown () {
 }
 
 function takepicture () {
-  var context = canvas.getContext('2d')
+  const context = canvas.getContext('2d')
   if (width && height) {
     canvas.width = width
     canvas.height = height
@@ -101,32 +103,82 @@ function takepicture () {
     var dataURL = canvas.toDataURL('image/png')
     photo.setAttribute('src', dataURL)
 
-    const requestBody = JSON.stringify({
-      name: userProfile.given_name,
-      url: dataURL
-    })
+    const base64image = dataURL.toString().substring(22, dataURL.toString().length)
 
-    var request = new Request('/gallery', {
+    const mongoRequest = new Request('/gallery', {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
-        'Content-type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8'
       },
       method: 'POST',
-      body: requestBody,
+      body: JSON.stringify({
+        name: userProfile.given_name,
+        url: dataURL
+      }),
       cache: false
     })
 
-    // Try Posting to Facebook
-    FB.ui({
-      method: 'feed',
-      name: 'I Did Not Wake Up On Time',
-      link: 'https://wakey2.herokuapp.com/',
-      caption: 'WakeyWakey Alarm Clock Webapp',
-      picture: dataURL,
-      description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
-    }, (res) => { console.log(res) })
+    const imgurRequest = new Request('https://api.imgur.com/3/image', {
+      headers: {
+        'Authorization': 'Client-ID 4b24a6a46e6bea7',
+        'Content-Type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify({
+        image: base64image,
+        type: 'base64',
+        description: 'Generated from WAKEYWAKEY Alarm Clock Webapp'
+      }),
+      cache: true
+    })
 
-    fetch(request)
+    function checkStatus (response) {
+      if (response.status >= 200 && response.status < 300) {
+        return response
+      } else {
+        var error = new Error(response.statusText)
+        error.response = response
+        throw error
+      }
+    }
+
+    function parseJSON (response) {
+      return response.json()
+    }
+
+    // Try Posting to IMGUR
+    // process.env.WAKEY_IMGUR_CLIENT_ID
+    // process.env.WAKEY_IMGUR_CLIENT_SECRET
+    fetch(imgurRequest)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then((res) => {
+      var imageURL = res.data.link
+
+      FB.ui({
+        method: 'feed',
+        name: 'I Did Not Wake Up On Time',
+        link: 'https://wakey2.herokuapp.com/',
+        caption: 'WakeyWakey Alarm Clock Webapp',
+        picture: imageURL,
+        description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
+      }, (res) => { console.log(res) })
+
+    }).catch((error) => {
+      console.log('Upload to IMGUR Failed: ' + error.message)
+    })
+
+    // Try Posting to Facebook
+    // FB.ui({
+    //   method: 'feed',
+    //   name: 'I Did Not Wake Up On Time',
+    //   link: 'https://wakey2.herokuapp.com/',
+    //   caption: 'WakeyWakey Alarm Clock Webapp',
+    //   picture: 'https://wakey2.herokuapp.com/img/wakeywakey.png',
+    //   description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
+    // }, (res) => { console.log(res) })
+
+    fetch(mongoRequest)
     .then(() => {
       retrievePictures()
     })
