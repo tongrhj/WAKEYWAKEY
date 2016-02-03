@@ -33,30 +33,7 @@ document.querySelector('#btn-login').addEventListener('click', () => {
       profilePic.src = profile.picture
       document.getElementById('profile-picture').appendChild(profilePic)
       document.getElementById('profile-name').textContent = profile.given_name
-
-      // Try Posting to Facebook
-      FB.ui({
-        method: 'feed',
-        link: 'https://wakey2.herokuapp.com/',
-        caption: 'WakeyWakey Alarm Clock Webapp',
-        picture: 'http://wakey2.herkokuapp.com/img/wakeywakey.png',
-        description: 'I failed to wake up this morning! Shame! Shame! Shame!'
-      }, (res) => {console.log(res)})
-
-      // var request = new Request('https://graph.facebook.com/me/feed', {
-      //   headers: {
-      //     'Authorization': 'Bearer ' + localStorage.getItem('fbAccessToken'),
-      //     'Content-type': 'application/json; charset=UTF-8'
-      //   },
-      //   method: 'POST',
-      //   body: 'Hello World',
-      //   cache: false
-      // })
-      // fetch(request)
-      // .then((res) => {
-      //   console.log(res)
-      // })
-
+      
       //Display Step 2
       document.getElementById('captureBox').classList.remove('hidden')
       document.getElementById('captureBox').classList.add('visible')
