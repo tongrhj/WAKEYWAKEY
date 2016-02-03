@@ -56,20 +56,9 @@ app.post('/gallery', (req, res) => {
     if (err) res.status(404).end('Score Not Found')
     res.json(photoToUpload)
   })
-
-  // Try Posting to Facebook
-  FB.ui({
-    method: 'feed',
-    name: 'I Did Not Wake Up On Time',
-    link: 'https://wakey2.herokuapp.com/',
-    caption: 'WakeyWakey Alarm Clock Webapp',
-    picture: 'photoToUpload',
-    description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
-  }, (res) => {console.log(res)})
-
 })
 
-app.use('*', (req,res) => {
+app.use('*', (req, res) => {
   res.status(404).send('404')
 })
 

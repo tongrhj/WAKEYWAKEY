@@ -1,5 +1,5 @@
 'use strict'
-/* global Audio fetch Request localStorage */
+/* global Audio fetch Request localStorage FB userProfile */
 
 const width = 320    // We will scale the photo width to this
 let height = 0       // This will be computed based on the input stream
@@ -98,12 +98,12 @@ function takepicture () {
     canvas.width = width
     canvas.height = height
     context.drawImage(video, 0, 0, width, height)
-    var data = canvas.toDataURL('image/png')
-    photo.setAttribute('src', data)
+    var dataURL = canvas.toDataURL('image/png')
+    photo.setAttribute('src', dataURL)
 
     const requestBody = JSON.stringify({
       name: userProfile.given_name,
-      url: data
+      url: dataURL
     })
 
     var request = new Request('/gallery', {
@@ -115,6 +115,17 @@ function takepicture () {
       body: requestBody,
       cache: false
     })
+
+    // Try Posting to Facebook
+    FB.ui({
+      method: 'feed',
+      name: 'I Did Not Wake Up On Time',
+      link: 'https://wakey2.herokuapp.com/',
+      caption: 'WakeyWakey Alarm Clock Webapp',
+      picture: dataURL,
+      description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
+    }, (res) => { console.log(res) })
+
     fetch(request)
     .then(() => {
       retrievePictures()
