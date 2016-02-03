@@ -15,8 +15,6 @@ let alarm
 let captureCountdown
 let cancelbutton
 
-const imgurClientID = '4b24a6a46e6bea7'
-
 function startup () {
   video = document.getElementById('capture-video')
   canvas = document.getElementById('capture-canvas')
