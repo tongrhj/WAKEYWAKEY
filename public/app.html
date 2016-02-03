@@ -2,13 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>WAKEY WAKEY</title>
+    <title>WAKEYWAKEY</title>
     <script src="//cdn.auth0.com/js/lock-8.2.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <meta property="og:url" content="http://wakey2.herokuapp.com">
-    <meta property="og:title" content="WAKEY WAKEY | Alarm Clock Powered by Public Shaming">
-    <meta property="og:description" content="If you don't get out of bed in time, WAKEY WAKEY posts your sleeping face to the world.">
+    <meta property="og:title" content="WAKEYWAKEY | Alarm Clock Powered by Public Shaming">
+    <meta property="og:description" content="If you don't get out of bed in time, WAKEYWAKEY posts your sleeping face to the world.">
     <meta property="og:image" content="http://i.imgur.com/QhmEfHO.png">
     <meta property="og:locale" content="en_GB">
 
@@ -35,6 +35,11 @@
         transition: opacity 1s;
       }
 
+      #capture-video, #capture-photo, #capture-gallery img {
+        width: 320px;
+        height: auto;
+      }
+
       .hidden {
         visibility: hidden;
         opacity: 0;
@@ -52,7 +57,7 @@
       <div class="mainBox" style="width: 300px;background-color: white;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items:center;">
         <h1>WAKEYWAKEY</h1>
         <h2>Have difficulty waking up on time?</h2>
-        <h3>If you don't get out of bed when the alarm goes, WAKEY WAKEY posts your sleeping face to the world.</h3>
+        <h3>If you don't get out of bed when the alarm goes, WAKEYWAKEY posts your sleeping face to the world.</h3>
       </div>
 
       <div class="mainBox" style="width:280px;background-color: white;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items:center;">
@@ -66,7 +71,7 @@
       <div id="captureBox" class="hidden mainBox" style="width:320px;display:flex;flex-direction: column;background-color: white;">
         <h1 style="color:#489cdf;">Step 2:</h1>
         <p>
-          Make sure you position your webcam so WAKEY WAKEY can watch you sleeping.
+          Make sure you position your webcam so WAKEYWAKEY can watch you sleeping.
         </p>
         <div class="capture-camera">
           <video id="capture-video">Video stream not available.</video>
@@ -82,14 +87,14 @@
             Ideally, the alarm will go off after 8 hours, and the photo capture at least 2 minutes after.
           </p>
         </div>
-        <canvas id="capture-canvas" style="display:none;">
+        <canvas id="capture-canvas" style="display:none;width:25%;height:25%;">
         </canvas>
         <div class="capture-output">
           <img id="capture-photo" alt="The screen capture will appear in this box.">
         </div>
       </div>
 
-      <div class="mainBox" style="width: 340px;background-color: white;flex-direction:column;text-align:center;display:flex;justify-content:center;align-items:center;" id="scoreboard">
+      <div class="mainBox" id="capture-gallery" style="width: 340px;background-color: white;flex-direction:column;text-align:center;display:flex;justify-content:center;align-items:center;">
         <h1 style="color:#489cdf;">Step 3:</h1>
         <h3>These people woke up like this:</h3>
       </div>
@@ -113,7 +118,6 @@
        }(document, 'script', 'facebook-jssdk'));
       </script>
       <script src="./js/auth0.js"></script>
-      <script src="./js/sampleURL.js"></script>
       <script src="./js/index.js"></script>
   </body>
 </html>

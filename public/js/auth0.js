@@ -1,4 +1,8 @@
+'use strict'
+
 const lock = new Auth0Lock('LRPGy0n09P5sE8FbmWlUQhXRUCY2EI2H', 'tongrhj.auth0.com')
+
+let userProfile
 
 document.querySelector('#btn-login').addEventListener('click', () => {
   lock.show({ authParams: { scope: 'openid' } }, function (err, profile, token) {
@@ -26,7 +30,7 @@ document.querySelector('#btn-login').addEventListener('click', () => {
       localStorage.setItem('fbAccessToken', profile.identities[0].access_token)
 
       // Save the profile
-      const userProfile = profile
+      userProfile = profile
       const profilePic = document.createElement('img')
       profilePic.src = profile.picture
       document.getElementById('profile-picture').appendChild(profilePic)

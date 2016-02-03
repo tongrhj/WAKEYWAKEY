@@ -1,19 +1,19 @@
-# WAKEY WAKEY
-### If you don't get out of bed in time, WAKEY WAKEY posts your sleeping face to the world.
+# WAKEYWAKEY
+### If you don't get out of bed in time, WAKEYWAKEY posts your sleeping face to the world.
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-green.svg?style=flat-square)](https://github.com/feross/standard)
 
-![screenshot](http://i.imgur.com/QhmEfHO.png "WAKEY WAKEY Sreenshot")
+![screenshot](http://i.imgur.com/QhmEfHO.png "WAKEYWAKEY Sreenshot")
 
 ## Installation
 ```
 npm install
 ```
 
-## To Run Watch
+## Development
 ```
 npm run dev
 ```
-## What WAKEY WAKEY Does
+## What WAKEYWAKEY Does
 * Facebook Login
 * Starts alarm countdown, can be cancelled
 * Use WebRTC to capture a photo of you sleeping after 5 second (demo-only)/ 8 hours

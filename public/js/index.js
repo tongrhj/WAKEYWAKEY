@@ -189,7 +189,7 @@ function retrievePictures () {
       res.forEach((doc) => {
         const photoPost = document.createElement('img')
         photoPost.src = doc.url
-        document.querySelector('#scoreboard').appendChild(photoPost)
+        document.querySelector('#capture-scoreboard').appendChild(photoPost)
       })
     })
 }
