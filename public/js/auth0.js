@@ -37,8 +37,10 @@ document.querySelector('#btn-login').addEventListener('click', () => {
       // Try Posting to Facebook
       FB.ui({
         method: 'feed',
-        href: 'https://wakey2.herokuapp.com/',
-        caption: 'I failed to wake up this morning! Shame! Shame! Shame!'
+        link: 'https://wakey2.herokuapp.com/',
+        caption: 'WakeyWakey Alarm Clock Webapp',
+        picture: 'http://wakey2.herkokuapp.com/img/wakeywakey.png',
+        description: 'I failed to wake up this morning! Shame! Shame! Shame!'
       }, (res) => {console.log(res)})
 
       // var request = new Request('https://graph.facebook.com/me/feed', {
