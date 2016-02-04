@@ -3,8 +3,7 @@
   "version": "1.1.0",
   "description": "If you fail to wake up, WAKEYWAKEY posts your sleeping picture to the world.",
   "scripts": {
-    "start": "nodemon server.js --exec babel-node",
-    "test": "standard js/*.js && ./node_modules/.bin/mocha"
+    "start": "nodemon server.js --exec babel-node"
   },
   "author": "Jared Tong <hello@jaredtong.com>",
   "license": "ISC",
@@ -30,5 +29,9 @@
     "ignore": [
       "/test/*"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tongrhj/IWULT-app.git"
   }
 }
