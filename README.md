@@ -2,7 +2,7 @@
 ### If you don't get out of bed in time, WAKEYWAKEY posts your sleeping face to the world.
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-green.svg?style=flat-square)](https://github.com/feross/standard)
 
-![screenshot](http://i.imgur.com/QhmEfHO.png "WAKEYWAKEY Sreenshot")
+![screenshot](https://wakey2.herokuapp.com/img/screenshot.png "WAKEYWAKEY Sreenshot")
 
 ## Installation
 ```
