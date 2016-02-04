@@ -5,15 +5,8 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const jwt = require('express-jwt')
-// const path = require('path')
-// const cloudinary = require('cloudinary')
-// cloudinary.config({
-//   cloud_name: 'tongrhj',
-//   api_key: '473581557469736',
-//   api_secret: 'TaywZ-zWEzJ_VShLbsjemcrQ9t0'
-// })
 
-const Photo = require('./data.js')
+const Photo = require('./models/photo.js')
 
 app.use(bodyParser.json({limit: '5mb'}))
 app.use(cors())
@@ -28,7 +21,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/' + 'app.html')
 })
 
-app.get('/gallery', (req, res) => {
+app.get('/gallery', jwtCheck, (req, res) => {
   Photo.find(function (err, data) {
     if (err) {
       console.error(err)
@@ -39,16 +32,9 @@ app.get('/gallery', (req, res) => {
   .then(data => {
     res.json(data)
   })
-  // cloudinary.api.resources((items) => {
-  //   res.render('index', { images: items.resources, cloudinary: cloudinary })
-  // })
-  // cloudinary.uploader.upload("http://www.example.com/image.jpg", function(result) {
-  //   console.log(result)
-  // })
-  // console.log('Loading Gallery')
 })
 
-app.post('/gallery', (req, res) => {
+app.post('/gallery', jwtCheck, (req, res) => {
   const photoToUpload = new Photo(req.body)
   console.log('Request: ' + req.body.name)
   // console.log(req.body.url)

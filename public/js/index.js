@@ -1,4 +1,5 @@
 'use strict'
+
 /* global Audio fetch Request localStorage FB userProfile */
 
 const width = 1200    // We will scale the photo width to this
