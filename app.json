@@ -1,0 +1,22 @@
+{
+  "name": "WAKEYWAKEY",
+  "scripts": {
+  },
+  "env": {
+    "WAKEY_AUTH0_AUDIENCE": {
+      "required": true
+    },
+    "WAKEY_AUTH0_SECRET": {
+      "required": true
+    },
+    "WAKEY_MONGODB_PASSWORD": {
+      "required": true
+    },
+    "WAKEY_MONGODB_USER": {
+      "required": true
+    }
+  },
+  "addons": [
+    "papertrail"
+  ]
+}
