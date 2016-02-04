@@ -150,7 +150,7 @@ function uploadToIMGUR (base64image) {
         description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
       }, (response) => {
         if (response && !response.error) {
-          console.log(response)
+          console.log('http://facebook.com/jaredtongrh/posts/' + response.json().id)
         }
       })
     }, {scope: 'publish_actions'})
