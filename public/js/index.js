@@ -2,7 +2,7 @@
 
 /* global Audio fetch Request localStorage FB userProfile */
 
-const width = 1200    // We will scale the photo width to this
+const width = 600    // We will scale the photo width to this
 let height = 0       // This will be computed based on the input stream
 
 let streaming = false
@@ -22,6 +22,8 @@ function startup () {
   photo = document.getElementById('capture-photo')
   startbutton = document.getElementById('capture-startbtn')
   cancelbutton = document.getElementById('capture-cancelbtn')
+
+  const aboutbutton = document.querySelector('#about-icon')
 
   navigator.getMedia = (navigator.getUserMedia ||
                         navigator.webkitGetUserMedia ||
@@ -66,6 +68,14 @@ function startup () {
     })
     e.preventDefault()
   }, false)
+
+  aboutbutton.addEventListener('click', (e) => {
+    document.querySelector('#about').classList.toggle('hidden')
+  })
+
+  document.querySelector('.close').addEventListener('click', (e) => {
+    document.querySelector('#about').classList.toggle('hidden')
+  })
 
   clearphoto()
 }
@@ -140,7 +150,7 @@ function uploadToIMGUR (base64image) {
         description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
       }, (response) => {
         if (response && !response.error) {
-          console.log('http://facebook.com/jaredtongrh/posts/' + response)
+          console.log(response)
         }
       })
     }, {scope: 'publish_actions'})
