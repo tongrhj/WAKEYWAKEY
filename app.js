@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/gallery', (req, res) => {
-  Photo.find(function (err, data) {
+  Photo.find((err, data) => {
     if (err) {
       console.error(err)
       res.status(404).end(err)
@@ -37,10 +37,9 @@ app.get('/gallery', (req, res) => {
 
 app.post('/gallery', (req, res) => {
   const photoToUpload = new Photo(req.body)
-  console.log('Request: ' + req.body.name)
-  // console.log(req.body.url)
+  console.log('Uploading Photo for: ' + req.body.name)
   photoToUpload.save(err => {
-    if (err) res.status(404).end('Score Not Found')
+    if (err) res.status(404).end('Photo Upload Failed')
     res.json(photoToUpload)
   })
 })

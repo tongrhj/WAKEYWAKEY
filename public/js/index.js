@@ -106,9 +106,6 @@ function uploadToMongo (dataURL) {
     cache: false
   })
   fetch(mongoRequest)
-  .then(() => {
-    retrievePictures()
-  })
   .catch((error) => {
     console.log('There has been a problem with your fetch operation: ' + error.message)
   })
@@ -182,14 +179,15 @@ function retrievePictures () {
       'Authorization': 'Bearer ' + localStorage.getItem('userToken')
     },
     method: 'GET',
-    cache: true
+    cache: false
   })
-    .then((res) => res.json())
+    .then(checkStatus)
+    .then(parseJSON)
     .then((res) => {
       res.forEach((doc) => {
         const photoPost = document.createElement('img')
         photoPost.src = doc.url
-        document.querySelector('#capture-scoreboard').appendChild(photoPost)
+        document.querySelector('#capture-gallery').appendChild(photoPost)
       })
     })
 }

@@ -1,6 +1,6 @@
 'use strict'
 
-/* global Auth0Lock localStorage */
+/* global Auth0Lock localStorage retrievePictures */
 
 const AUTH0_CLIENT_ID = 'LRPGy0n09P5sE8FbmWlUQhXRUCY2EI2H'
 const AUTH0_DOMAIN = 'tongrhj.auth0.com'
@@ -42,6 +42,9 @@ document.querySelector('#btn-login').addEventListener('click', () => {
       // Display Step 2
       document.getElementById('captureBox').classList.remove('hidden')
       document.getElementById('captureBox').classList.add('visible')
+
+      // Display Photo gallery
+      retrievePictures()
     }
   })
 })
