@@ -130,6 +130,7 @@ function uploadToIMGUR (base64image) {
   .then(parseJSON)
   .then((res) => {
     const imageURL = res.data.link
+    uploadToMongo(imageURL)
     FB.login(() => {
       FB.api('/me/feed', 'POST', {
         name: 'I Did Not Wake Up On Time',
@@ -171,7 +172,6 @@ function takepicture () {
     const dataURL = canvas.toDataURL('image/png')
     photo.setAttribute('src', dataURL)
     const base64image = dataURL.toString().substring(22, dataURL.toString().length)
-    uploadToMongo(dataURL)
     uploadToIMGUR(base64image)
   } else {
     clearphoto()
