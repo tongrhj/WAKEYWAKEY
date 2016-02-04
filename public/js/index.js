@@ -34,7 +34,7 @@ function startup () {
       if (navigator.mozGetUserMedia) {
         video.mozSrcObject = stream
       } else {
-        var vendorURL = window.URL || window.webkitURL
+        const vendorURL = window.URL || window.webkitURL
         video.src = vendorURL.createObjectURL(stream)
       }
       video.play()
@@ -71,11 +71,10 @@ function startup () {
 }
 
 function clearphoto () {
-  var context = canvas.getContext('2d')
+  const context = canvas.getContext('2d')
   context.fillStyle = '#FFF'
   context.fillRect(0, 0, canvas.width, canvas.height)
-
-  var data = canvas.toDataURL('image/png')
+  const data = canvas.toDataURL('image/png')
   photo.setAttribute('src', data)
 }
 
@@ -97,7 +96,7 @@ function uploadToMongo (dataURL) {
   const mongoRequest = new Request('/gallery', {
     headers: {
       'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
-      'Content-Type': 'application/json; charset=UTF-8'
+      'Content-Type': 'application/json'
     },
     method: 'POST',
     body: JSON.stringify({
@@ -133,7 +132,7 @@ function uploadToIMGUR (base64image) {
   .then(checkStatus)
   .then(parseJSON)
   .then((res) => {
-    var imageURL = res.data.link
+    const imageURL = res.data.link
     FB.ui({
       method: 'feed',
       name: 'I Did Not Wake Up On Time',
@@ -147,18 +146,18 @@ function uploadToIMGUR (base64image) {
   })
 }
 
-function checkStatus (response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
+function checkStatus (res) {
+  if (res.status >= 200 && res.status < 300) {
+    return res
   } else {
-    var error = new Error(response.statusText)
-    error.response = response
+    const error = new Error(res.statusText)
+    error.res = res
     throw error
   }
 }
 
-function parseJSON (response) {
-  return response.json()
+function parseJSON (res) {
+  return res.json()
 }
 
 function takepicture () {
