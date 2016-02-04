@@ -130,14 +130,19 @@ function uploadToIMGUR (base64image) {
   .then(parseJSON)
   .then((res) => {
     const imageURL = res.data.link
-    FB.ui({
-      method: 'feed',
-      name: 'I Did Not Wake Up On Time',
-      link: 'https://wakey2.herokuapp.com/',
-      caption: 'WakeyWakey Alarm Clock Webapp',
-      picture: imageURL,
-      description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
-    }, (res) => { console.log(res) })
+    FB.login(() => {
+      FB.api('/me/feed', 'POST', {
+        name: 'I Did Not Wake Up On Time',
+        link: 'https://wakey2.herokuapp.com/',
+        caption: 'WakeyWakey Alarm Clock Webapp',
+        picture: imageURL,
+        description: 'I failed to wake up this morning and this is my punishment. Shame! Shame! Shame!'
+      }, (response) => {
+        if (response && !response.error) {
+          console.log('http://facebook.com/jaredtongrh/posts/' + response)
+        }
+      })
+    }, {scope: 'publish_actions'})
   }).catch((error) => {
     console.log('Upload to IMGUR Failed: ' + error.message)
   })
