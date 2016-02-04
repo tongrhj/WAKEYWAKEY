@@ -39,7 +39,7 @@ document.querySelector('#btn-login').addEventListener('click', () => {
         })
       }
 
-      // Display Step 2
+      // Display Step 3
       document.getElementById('captureBox').classList.remove('hidden')
       document.getElementById('captureBox').classList.add('visible')
 
